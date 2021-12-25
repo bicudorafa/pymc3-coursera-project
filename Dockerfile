@@ -1,11 +1,13 @@
-ARG BASE_CONTAINER=jupyter/minimal-notebook
+ARG BASE_CONTAINER=jupyter/minimal-notebook:hub-2.0.0
 FROM $BASE_CONTAINER
 
 LABEL author="bicudorafa"
 
 USER root
 
-RUN conda install -c conda-forge pymc3 theano-pymc mkl mkl-service sunode=0.2.1 plotly
+COPY environment.yml .
+RUN conda env update --file environment.yml
+
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
 
