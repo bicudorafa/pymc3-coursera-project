@@ -1,0 +1,12 @@
+version: "2"
+services:
+  jupyter:
+    build: .
+    container_name: pymc3_env
+    ports:
+      - 8888:8888
+    volumes: 
+      - .:/home/jovyan/work
+volumes:
+  .:
+    external: true
